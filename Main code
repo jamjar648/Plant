@@ -1,0 +1,31 @@
+#include <Servo.h> //Accessing servo library through arduino
+
+
+//Defining Servos
+Servo headServo;
+Servo leftServo;
+Servo rightServo;
+int angle = 90;
+
+
+void setup() {
+  //Opens Serial
+  Serial.begin(9600);
+  //Attaches Servos to Pins
+  rightServo.attach(10);
+  leftServo.attach(8);
+  headServo.attach(9);
+}
+
+
+void loop() {
+  //if there is info being passed on the serial port
+  if (Serial.available()) {
+    angle = Serial.read();
+    //writes servo to angle
+    headServo.write(angle);
+    leftServo.write(angle);
+    rightServo.write(angle);
+    delay(500);
+  }
+}
